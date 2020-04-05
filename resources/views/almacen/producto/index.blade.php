@@ -17,7 +17,7 @@
 					<th>Código</th>
 					<th>Categoría</th>
 					<th>Stock</th>
-					<th>Imagen</th>
+					<th>Unidad</th>
 					<th>Estado</th>
 					<th>Opciones</th>
 				</thead>
@@ -28,9 +28,7 @@
 					<td>{{ $prod->codigo}}</td>
 					<td>{{ $prod->categoria}}</td>
 					<td>{{ $prod->stock}}</td>
-					<td>
-						<img src="{{asset('imagenes/productos/'.$prod->imagen)}}" alt="{{ $prod->nombre}}" height="100px" width="100px" class="img-thumbnail">
-					</td>
+					<td>{{ $prod->unidad}}</td>
 					<td>{{ $prod->estado}}</td>
 					<td>
 						<a href="{{URL::action('ProductoController@edit',$prod->idproducto)}}"><button class="btn btn-info">Editar</button></a>

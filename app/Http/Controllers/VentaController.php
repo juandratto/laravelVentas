@@ -41,6 +41,10 @@ class VentaController extends Controller
     
     public function create()
     {
+		/*$idfact = DB::table('seq_factura')
+			->select(DB::raw('(ifnull(max(id_factura),0)+1) as num_serie'))
+			->get();*/
+
     	$personas=DB::table('persona')
             ->where('tipo_persona','=','Cliente')
             ->where('ind_inactivo','=','0')
@@ -48,7 +52,7 @@ class VentaController extends Controller
     	
     	$productos=DB::table('producto as pr')
     		->join('detalle_ingreso as di','pr.idproducto','=','di.idproducto')
-    		->select(DB::raw('CONCAT(pr.codigo," ",pr.nombre) as producto'),'pr.idproducto', 'pr.stock',DB::raw('avg(di.precio_venta) as precio_promedio'))
+    		->select(DB::raw('CONCAT(pr.codigo," ",pr.nombre) as producto'),'pr.idproducto', 'pr.stock',DB::raw('ROUND(avg(di.precio_venta),2) as precio_promedio'))
     		->where('pr.estado','=','Activo')
     		->where('pr.stock','>','0')
     		->groupBy('producto','pr.idproducto','pr.stock')
