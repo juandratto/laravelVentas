@@ -15,7 +15,6 @@ use DB;
 use Carbon\Carbon;
 use Response;
 use Illuminate\Support\Collention;
-use DateTime;
 
 class VentaController extends Controller
 {
