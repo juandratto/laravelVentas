@@ -24,7 +24,7 @@ class ProductoController extends Controller
     		$query=trim($request->get('searchText'));
     		$productos=DB::table('producto as pr')
     		->join('categoria as cat','pr.idcategoria','=','cat.idcategoria')
-    		->select('pr.idproducto','pr.nombre','pr.codigo','pr.stock','cat.nombre as categoria','pr.descripcion', 'pr.unidad','pr.estado')
+    		->select('pr.idproducto','pr.nombre','pr.codigo','pr.stock','cat.nombre as categoria','pr.descripcion', 'pr.imagen','pr.estado')
     		->where('pr.nombre','LIKE','%'.$query.'%')
             ->orwhere('pr.codigo','LIKE','%'.$query.'%')
     		->orderBy('pr.idproducto','desc')
@@ -47,12 +47,12 @@ class ProductoController extends Controller
     	$producto->stock=$request->get('stock');
     	$producto->descripcion=$request->get('descripcion');
     	$producto->estado='Activo';
-    	$producto->unidad=$request->get('unidad');
-/*     	if (Input::hasFile('imagen')){
+    	
+    	if (Input::hasFile('imagen')){
     		$file=Input::file('imagen');
     		$file->move(public_path().'/imagenes/productos/',$file->getClientOriginalName());
     		$producto->imagen=$file->getClientOriginalName();
-    	} */
+    	}
     	$producto->save();
 
     	Return Redirect::to('almacen/producto');
@@ -78,14 +78,13 @@ class ProductoController extends Controller
     	$producto->codigo=$request->get('codigo');
     	$producto->nombre=$request->get('nombre');
     	$producto->stock=$request->get('stock');
-		$producto->descripcion=$request->get('descripcion');
-		$producto->unidad=$request->get('unidad');
+    	$producto->descripcion=$request->get('descripcion');
     	
-    	/*if (Input::hasFile('imagen')){
+    	if (Input::hasFile('imagen')){
     		$file=Input::file('imagen');
     		$file->move(public_path().'/imagenes/productos/',$file->getClientOriginalName());
     		$producto->imagen=$files->getClientOriginalName();
-    	}*/
+    	}
 
     	$producto->update();
     	return Redirect::to('almacen/producto');

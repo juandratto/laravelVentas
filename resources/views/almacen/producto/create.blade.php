@@ -55,13 +55,8 @@
 	</div>
 	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 		<div class="form-group">
-			<label>Unidad</label>
-				<select name="unidad" class="form-control">
-					<option value="UND">UND</option>
-					<option value="KG">KG</option>
-					<option value="LT">LT</option>
-					<option value="M2">M2</option>
-				</select>
+			<label for="imagen">Imagen</label>
+			<input type="file" class="form-control" name="imagen" ></input>
 		</div>
 	</div>
 	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">

@@ -10,7 +10,7 @@ class Producto extends Model
 
     protected $primaryKey='idproducto';
 
-    #public $timestamps=false;
+    public $timestamps=false;
 
     protected $fillable= [
     		'idcategoria',
@@ -18,9 +18,8 @@ class Producto extends Model
     		'nombre',
     		'stock',
     		'descripcion',
-    		#'imagen',
-            'estado',
-            'unidad'
+    		'imagen',
+    		'estado'
     ];
 
     protected $guarded=[

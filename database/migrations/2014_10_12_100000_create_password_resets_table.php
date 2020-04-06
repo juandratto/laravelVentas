@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTimestampsToProductTable extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,10 @@ class AddTimestampsToProductTable extends Migration
      */
     public function up()
     {
-        Schema::table('producto', function (Blueprint $table) {
-            //
-            $table->timestamps();
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token')->index();
+            $table->timestamp('created_at');
         });
     }
 
@@ -25,9 +26,6 @@ class AddTimestampsToProductTable extends Migration
      */
     public function down()
     {
-        Schema::table('producto', function (Blueprint $table) {
-            //
-            $table->dropTimestamps();
-        });
+        Schema::drop('password_resets');
     }
 }

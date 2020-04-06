@@ -29,11 +29,11 @@
 			<label>Categoría</label>
 			<select name="idcategoria" class="form-control">
 				@foreach ($categorias as $cat)
-					@if($cat->idcategoria==$producto->idcategoria)
-					<option value="{{$cat->idcategoria}}" selected>{{$cat->nombre}}</option>
-					@else
-					<option value="{{$cat->idcategoria}}">{{$cat->nombre}}</option>
-					@endif
+				@if($cat->idcategoria==$producto->idcategoria)
+				<option value="{{$cat->idcategoria}}" selected>{{$cat->nombre}}</option>
+				@else
+				<option value="{{$cat->idcategoria}}">{{$cat->nombre}}</option>
+				@endif
 				@endforeach
 			</select>
 		</div>
@@ -58,17 +58,11 @@
 	</div>
 	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 		<div class="form-group">
-			<label>Unidad</label>
-					<select name="unidad" class="form-control">
-					@php ($unidades = ["UND", "KG", "LT", "M2"])
-					@foreach ($unidades as $un)
-						@if($un==$producto->unidad)
-						<option value="{{$un}}" selected>{{$un}}</option>
-						@else
-						<option value="{{$un}}">{{$un}}</option>
-						@endif
-					@endforeach
-					</select>
+			<label for="imagen">Imagen</label>
+			<input type="file" class="form-control" name="imagen"></input>
+			@if(($producto->imagen)!="")
+			<img src="{{asset('imagenes/productos/'.$producto->imagen)}}" height="300px" width="300px">
+			@endif
 		</div>
 	</div>
 	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
