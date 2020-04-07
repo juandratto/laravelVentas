@@ -24,7 +24,7 @@ class ProductoController extends Controller
     		$query=trim($request->get('searchText'));
     		$productos=DB::table('producto as pr')
     		->join('categoria as cat','pr.idcategoria','=','cat.idcategoria')
-    		->select('pr.idproducto','pr.nombre','pr.codigo','pr.stock','cat.nombre as categoria','pr.descripcion', 'pr.imagen','pr.estado')
+    		->select('pr.idproducto','pr.nombre','pr.codigo','pr.stock','cat.nombre as categoria','pr.descripcion', 'pr.imagen','pr.estado', 'pr.unidad')
     		->where('pr.nombre','LIKE','%'.$query.'%')
             ->orwhere('pr.codigo','LIKE','%'.$query.'%')
     		->orderBy('pr.idproducto','desc')
@@ -52,7 +52,10 @@ class ProductoController extends Controller
     		$file=Input::file('imagen');
     		$file->move(public_path().'/imagenes/productos/',$file->getClientOriginalName());
     		$producto->imagen=$file->getClientOriginalName();
-    	}
+		}
+		
+		$producto->unidad=$request->get('unidad');
+
     	$producto->save();
 
     	Return Redirect::to('almacen/producto');
@@ -84,7 +87,9 @@ class ProductoController extends Controller
     		$file=Input::file('imagen');
     		$file->move(public_path().'/imagenes/productos/',$file->getClientOriginalName());
     		$producto->imagen=$files->getClientOriginalName();
-    	}
+		}
+		
+		$producto->unidad=$request->get('unidad');
 
     	$producto->update();
     	return Redirect::to('almacen/producto');

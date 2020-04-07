@@ -58,11 +58,17 @@
 	</div>
 	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 		<div class="form-group">
-			<label for="imagen">Imagen</label>
-			<input type="file" class="form-control" name="imagen"></input>
-			@if(($producto->imagen)!="")
-			<img src="{{asset('imagenes/productos/'.$producto->imagen)}}" height="300px" width="300px">
-			@endif
+		<label>Unidad</label>
+				<select name="unidad" class="form-control">
+				@php ($unidades = ["UND", "KG", "LT", "M2"])
+				@foreach ($unidades as $un)
+					@if($un==$producto->unidad)
+					<option value="{{$un}}" selected>{{$un}}</option>
+					@else
+					<option value="{{$un}}">{{$un}}</option>
+					@endif
+				@endforeach
+				</select>
 		</div>
 	</div>
 	<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">

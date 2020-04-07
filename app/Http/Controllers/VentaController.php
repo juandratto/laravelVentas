@@ -48,7 +48,7 @@ class VentaController extends Controller
     	
     	$productos=DB::table('producto as pr')
     		->join('detalle_ingreso as di','pr.idproducto','=','di.idproducto')
-    		->select(DB::raw('CONCAT(pr.codigo," ",pr.nombre) as producto'),'pr.idproducto', 'pr.stock',DB::raw('avg(di.precio_venta) as precio_promedio'))
+    		->select(DB::raw('CONCAT(pr.codigo," ",pr.nombre) as producto'),'pr.idproducto', 'pr.stock',DB::raw('ROUND(avg(di.precio_venta),2) as precio_promedio'))
     		->where('pr.estado','=','Activo')
     		->where('pr.stock','>','0')
     		->groupBy('producto','pr.idproducto','pr.stock')
@@ -79,7 +79,7 @@ class VentaController extends Controller
     		$descuento = $request->get('descuento');
     		$precio_venta = $request->get('precio_venta');
 
-			$cont = 0;
+    		$cont = 0;
 
     		while($cont < count($idproducto)){
 
@@ -89,13 +89,9 @@ class VentaController extends Controller
     			$detalle->cantidad = $cantidad[$cont];
     			$detalle->descuento = $descuento[$cont];
     			$detalle->precio_venta = $precio_venta[$cont];
-				$detalle->save();
-				
-
-				//$ceItems[] = $item;
-
+    			$detalle->save();
     			$cont = $cont +1;
-			}
+    		}
 
     		DB::commit();
     	} catch (Exception $e) {

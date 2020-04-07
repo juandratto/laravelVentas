@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-		<h4>Nueva Venta</h4>
+		<h5>Nueva Venta</h5>
 		@if (count($errors)>0)
 		<div class="alert alert-danger">
 			<ul>
@@ -73,7 +73,7 @@
 			</div>
 			<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
 				<div class="form-group">
-					<label for="cantidad">Stock</label>
+					<label for="stock">Stock</label>
 					<input type="number" disabled name="pstock" id="pstock" class="form-control" placeholder="stock">
 				</div>
 			</div>
@@ -85,7 +85,7 @@
 			</div>
 			<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
 				<div class="form-group">
-					<label for="precio_compra">Descuento</label>
+					<label for="descuento">Descuento</label>
 					<input type="number" name="pdescuento" id="pdescuento" class="form-control" placeholder="Descuento">					
 				</div>
 			</div>
@@ -158,12 +158,12 @@
 
 		idproducto=datosProducto[0];
 		producto=$("#pidproducto option:selected").text();
-		cantidad=$("#pcantidad").val();
-		descuento=$("#pdescuento").val();
+		cantidad=parseInt($("#pcantidad").val()) || 0;
+		descuento=parseInt($("#pdescuento").val()) || 0;
 		precio_venta=$("#pprecio_venta").val();
 		stock=$("#pstock").val();
 
-		if (idproducto!="" && cantidad!="" && cantidad>0 && descuento!="" && precio_venta!="") 
+		if (idproducto!="" && cantidad>0 && precio_venta!="") 
 		{
 			if (stock>=cantidad)
 			{
