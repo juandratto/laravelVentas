@@ -32,23 +32,23 @@
 	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
 		<div class="form-group">
 			<label>Tipo Comprobante</label>
-			<select name="tipo_comprobante" class="form-control">
-				<option value="Boleta">Boleta</option>
-				<option value="Factura">Factura</option>
-				<option value="Ticket">Ticket</option>
+			<select name="tipo_comprobante" id="ptipocomprobante" class="form-control">
+			@foreach($comprobantes as $comprobante)
+				<option value="{{$comprobante->tipo_comprobante}}_{{$comprobante->serie_comprobante}}_{{$comprobante->num_comprobante}}">{{$comprobante->tipo_comprobante}}</option>
+			@endforeach
 			</select>
 		</div>
 	</div>
 	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
 		<div class="form-group">
 			<label for="serie_comprobante">Serie Comprobante</label>
-			<input type="text" class="form-control" name="serie_comprobante" value="{{old('serie_comprobante')}}" placeholder="Serie de comprobante..."></input>
+			<input type="text" class="form-control" id="pseriecomprobante" name="serie_comprobante" value="{{$comprobantes[0]->serie_comprobante}}" placeholder="Serie de comprobante..."></input>
 		</div>
 	</div>
 	<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
 		<div class="form-group">
 			<label for="num_comprobante">Número de Comprobante</label>
-			<input type="text" class="form-control" name="num_comprobante" required value="{{old('num_comprobante')}}" placeholder="Número de comprobante..."></input>
+			<input type="text" class="form-control" id="pnumcomprobante" name="num_comprobante" required value="{{$comprobantes[0]->num_comprobante}}" placeholder="Número de comprobante..."></input>
 		</div>
 	</div>
 </div>
@@ -144,12 +144,22 @@
 
 	$("#guardar").hide();
 	$("#pidproducto").change(mostrarValores);
+	$("#ptipocomprobante").change(cambioValComprob);
 
 	function mostrarValores(){
 
 		datosProducto=document.getElementById('pidproducto').value.split('_');
 		$("#pprecio_venta").val(datosProducto[2]);
 		$("#pstock").val(datosProducto[1]);
+	}
+
+	function cambioValComprob(){
+
+		datoscomprobante=document.getElementById('ptipocomprobante').value.split('_');
+		if (datoscomprobante[0] == "Factura"){
+			$("#pseriecomprobante").val(datoscomprobante[1]);
+			$("#pnumcomprobante").val(datoscomprobante[2]);
+		}
 	}
 
 	function agregar(){
